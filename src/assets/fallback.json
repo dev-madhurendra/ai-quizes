@@ -1,0 +1,13 @@
+[
+  {
+    "question": "What is the main difference between an interface and an abstract class in Java?",
+    "options": [
+      "Interfaces can have constructors, abstract classes cannot",
+      "Abstract classes can have implemented methods, interfaces cannot (before Java 8)",
+      "Abstract classes cannot be inherited",
+      "Interfaces can contain instance variables"
+    ],
+    "correctAnswer": "B",
+    "explanation": "Before Java 8, interfaces could only have abstract methods, while abstract classes can include both abstract and concrete methods."
+  }
+]
