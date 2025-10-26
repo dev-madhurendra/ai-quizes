@@ -1,10 +1,11 @@
 import { Question, SelectedAnswer } from "./interfaces";
 
-export const getDateKey = (offset = 0) => {
+export function getDateKey(offsetDays = 0): string {
   const date = new Date();
-  date.setDate(date.getDate() + offset);
+  date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+  date.setDate(date.getDate() + offsetDays);
   return date.toISOString().split("T")[0];
-};
+}
 
 export const getCachedQuiz = (key: string) => {
   const data = localStorage.getItem(`quiz_${key}`);

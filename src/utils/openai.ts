@@ -72,9 +72,11 @@ async function prefetchTomorrow(tomorrowKey: string) {
 
 export async function loadTodayQuestions() {
   const todayKey = getDateKey(0);
+  console.log(todayKey)
   const tomorrowKey = getDateKey(1);
 
   const cachedToday = localStorage.getItem(`quiz_${todayKey}`);
+  console.log(cachedToday)
   if (cachedToday) {
     prefetchTomorrow(tomorrowKey);
     return JSON.parse(cachedToday);
