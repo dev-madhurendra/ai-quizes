@@ -97,7 +97,7 @@ export function getCurrentStreak(): number {
 
 export function updateStreak(): number {
   const key = "quiz_streak";
-  const today = new Date().toISOString().split("T")[0];
+  const today = getDateKey();
 
   const saved = localStorage.getItem(key);
   const data = saved ? JSON.parse(saved) : { lastCompleted: "", streak: 0 };
