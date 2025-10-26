@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import QuestionDisplay from "./QuestionDisplay";
 import ResultCard from "./ResultCard";
 import { IQuizCard, SelectedAnswer } from "../utils/interfaces";
+import { getImprovements } from "../utils/helper";
 
-const QuizCard: React.FC<IQuizCard> = ({ questions }) => {
+const QuizCard: React.FC<IQuizCard> = ({ questions, onQuizCompleted }) => {
   const [current, setCurrent] = useState(0);
   const [score, setScore] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState<SelectedAnswer[]>([]);
@@ -38,51 +39,14 @@ const QuizCard: React.FC<IQuizCard> = ({ questions }) => {
     setCurrent((prev) => prev + 1);
   };
 
-  const getImprovements = (): string[] => {
-    const improvements: string[] = [];
-    const wrongAnswers = selectedAnswers.filter((a) => !a.isCorrect);
-
-    if (wrongAnswers.length > 0) {
-      improvements.push(
-        `You missed ${wrongAnswers.length} question${
-          wrongAnswers.length > 1 ? "s" : ""
-        } - review them carefully`
-      );
-
-      const codeQuestions = wrongAnswers.filter(
-        (a) => questions.find((q) => q.question === a.question)?.code !== null
-      );
-
-      if (codeQuestions.length > 0) {
-        improvements.push(
-          "Practice more code-based problems and syntax understanding"
-        );
-      }
-
-      if (score < questions.length * 0.6) {
-        improvements.push("Study Java fundamentals more thoroughly");
-        improvements.push(
-          "Focus on core concepts like OOP, data types, and control structures"
-        );
-      }
-
-      if (wrongAnswers.length >= questions.length / 2) {
-        improvements.push(
-          "Consider reviewing Java documentation and tutorials"
-        );
-      }
-    }
-
-    return improvements;
-  };
-
   if (current >= questions.length) {
+    onQuizCompleted()
     return (
       <ResultCard
         score={score}
         total={questions.length}
         onRetry={() => window.location.reload()}
-        improvements={getImprovements()}
+        improvements={getImprovements(selectedAnswers, questions, score)}
       />
     );
   }

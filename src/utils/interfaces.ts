@@ -24,6 +24,7 @@ export interface IQuestionDisplay {
 
 export interface IQuizCard {
   questions: Question[];
+  onQuizCompleted: () => void
 }
 
 export interface SelectedAnswer {
