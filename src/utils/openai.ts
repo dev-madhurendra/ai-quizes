@@ -109,9 +109,8 @@ export function updateStreak(): number {
 
   let streak = data.streak;
 
-  if (diffDays === 1) streak += 1; // next consecutive day
-  else if (diffDays > 1) streak = 1; // missed day or first quiz
-  // same day => keep streak as-is
+  if (diffDays === 1) streak += 1;
+  else if (diffDays > 1) streak = 1; 
 
   localStorage.setItem(
     key,
